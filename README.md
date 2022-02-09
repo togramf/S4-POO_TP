@@ -8,15 +8,15 @@ Repo forked forked from JulesFouchy/Simple-Cpp-Setup
 
 #### Debugger
 
-[x] try 'Run and Debug'
-[ ] try to place breakpoints
-[ ] inspect state and call stack
+- [x] try 'Run and Debug'
+- [ ] try to place breakpoints
+- [ ] inspect state and call stack
 
 #### Formatting tool
-Clang format 
+- Clang format 
 
 #### Static Analysers 
-Clang tidy 
+- Clang tidy 
 
 #### Naming
 Take the time to rename whenever you notice a name that is not quite accurate!
@@ -26,7 +26,7 @@ Boolean as question to make clear what true and false mean
 no abbreviations
 append "out" to non-const reference parameters
 
-[ ] watch from 41:30 [Lien](https://youtu.be/FyCYva9DhsI?t=2490/"Kevlin Henney, Clean Coders Hate What Happens to Your Code When You Use These Enterprise Programming Tricks")
+- [ ] watch from 41:30 [Kevlin Henney, Clean Coders Hate What Happens to Your Code When You Use These Enterprise Programming Tricks](https://youtu.be/FyCYva9DhsI?t=2490)
 
 #### Stack vs Heap
 - always use the stack (`int i = 3`, `std::variant`)
