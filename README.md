@@ -1,29 +1,43 @@
-# Simple-Cpp-Setup
+# S4 - Object oriented Programming course
 
-Welcome to this minimalist C++ project!
+Repo forked forked from JulesFouchy/Simple-Cpp-Setup
 
-## If you use the Dev Container
+## Lessons
 
-If you install [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) and [Docker](https://www.docker.com/products/docker-desktop), you will be able to run your code inside a Linux container (kind of like a virtual machine, but faster). Also, you will get static analyzers, code formatters and useful extensions installed out of the box! It is a great option to get started with C++ quickly.
+### Level 1
 
-(Unfortunately, if you want to do GUI applications they don't work well from within a container and you might have to do a proper setup on your own desktop instead. But for simple command-line applications this works amazingly well!)
+#### Debugger
 
-NB: the container might take a while to build the first time.
+[x] try 'Run and Debug'
+[ ] try to place breakpoints
+[ ] inspect state and call stack
 
-## If you don't use the Dev Container
+#### Formatting tool
+Clang format 
 
-### Compiling
+#### Static Analysers 
+Clang tidy 
 
-You need to install [CMake](https://cmake.org/download/).
+#### Naming
+Take the time to rename whenever you notice a name that is not quite accurate!
+Good name = consise + descriptive
 
-To use CMake I recommend this VS Code extension : [ms-vscode.cmake-tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools). You will need to setup the extension with a compiler. Here is [the tutorial](https://code.visualstudio.com/docs/cpp/cmake-linux). It is based on Linux but at the bottom of the page you will find the explanations to adapt it for [Windows](https://code.visualstudio.com/docs/cpp/config-msvc) and [Mac](https://code.visualstudio.com/docs/cpp/config-clang-mac).
+Boolean as question to make clear what true and false mean
+no abbreviations
+append "out" to non-const reference parameters
 
-Alternatively you can just create a *build* folder at the root of this project, open a terminal and run `cmake ..`; chances are it will detect what compiler you have installed and generate the appropriate Makefile / Visual Studio solution / Xcode project.
+[ ] watch from 41:30 [Lien](https://youtu.be/FyCYva9DhsI?t=2490/"Kevlin Henney, Clean Coders Hate What Happens to Your Code When You Use These Enterprise Programming Tricks")
 
-### Auto-formatting
+#### Stack vs Heap
+- always use the stack (`int i = 3`, `std::variant`)
+- if need to use the heap (for big object, polymorphism):
+    - never use `new`
+    - but a `std::unique_ptr` or a `std::shared_ptr`
 
-[Check this out](https://julesfouchy.github.io//Learn--Clean-Code-With-Cpp/lessons/formatting-tool) to learn why you would want to use a code formatter and how to do it.
+#### Consistency in style
+separate words ? 
+snake_case 
 
-### Static analysis
+#### Make it work, then make it good
+once it works, go back to the code and try to improve it 
 
-[Check this out](https://julesfouchy.github.io/Learn--Clean-Code-With-Cpp/lessons/static-analysis-and-sanitizers) to learn why you would want to use static analysis and how to do it.
