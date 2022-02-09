@@ -13,10 +13,10 @@ Repo forked forked from JulesFouchy/Simple-Cpp-Setup
 - [ ] inspect state and call stack
 
 #### Formatting tool
-- Clang format 
+Clang format -> doesn't work 
 
 #### Static Analysers 
-- Clang tidy 
+Clang tidy 
 
 #### Naming
 Take the time to rename whenever you notice a name that is not quite accurate!
@@ -35,9 +35,14 @@ append "out" to non-const reference parameters
     - but a `std::unique_ptr` or a `std::shared_ptr`
 
 #### Consistency in style
-separate words ? 
-snake_case 
+separate words ? `snake_case` 
 
 #### Make it work, then make it good
 once it works, go back to the code and try to improve it 
 
+## TP
+
+### Guess the number 
+
+- [x] make it work
+- [ ] make it prettier 
