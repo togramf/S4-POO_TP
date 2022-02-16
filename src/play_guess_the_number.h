@@ -1,16 +1,10 @@
+#pragma once
+
 #include <iostream>
-#include <random>
+#include "random.hpp"
+#include "get_input_from_user.h"
 
-/**
- * @brief return a random int between min and max (both included)
- * 
- * @param min 
- * @param max 
- * @return int 
- */
-int rand (int min, int max);
-
-int get_int_from_user();
+int get_int_from_user(const int min, const int max);
 
 void compare(const int hypothese, const int to_find);
 

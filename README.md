@@ -40,9 +40,32 @@ separate words ? `snake_case`
 #### Make it work, then make it good
 once it works, go back to the code and try to improve it 
 
+### Level 2
+
+#### Free Functions
+
+
 ## TP
 
 ### Guess the number 
 
 - [x] make it work
 - [ ] make it prettier 
+
+- [x] add a score counter
+- [ ] correct display of score (not really clean) 
+
+### Hangman 
+
+Aside : 
+- [x] isolate rand function
+- [ ] turn rand in template
+- [x] isolate get_input_from_a_user 
+- [x] turn it into a template 
+
+Game :
+- [x] first functionning version 
+- [x] make prettier 
+- [ ] bonus class
+
+### Adding a menu 
