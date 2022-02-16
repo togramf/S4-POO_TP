@@ -69,3 +69,6 @@ Game :
 - [ ] bonus class
 
 ### Adding a menu 
+
+- [x] basic menu
+- [ ] struct game and separate file 
