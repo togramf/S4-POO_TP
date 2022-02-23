@@ -6,6 +6,21 @@ Repo forked forked from JulesFouchy/Simple-Cpp-Setup
 
 ### Level 1
 
+#### Use an IDE
+VSCode 4ever <3
+- rename : F2
+- go to definition : F12
+- go to symbol : CTRL + SHIFT + 0 
+- go to file : CTRL + P 
+- switch .h and .cpp : ALT + 0 
+- find all references 
+- search for a word : CTRL + F (current file), CTRL + SHIFT + F (whole project)
+- build : F7
+- run : CTRL + F5 
+
+#### Use Git 
+gitKraken <3
+
 #### Debugger
 
 - [x] try 'Run and Debug'
@@ -148,4 +163,5 @@ Game :
 ### Adding a menu 
 
 - [x] basic menu
-- [ ] struct game and separate file 
+- [x] separate file 
+- [ ] struct game 
