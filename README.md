@@ -164,4 +164,8 @@ Game :
 
 - [x] basic menu
 - [x] separate file 
-- [ ] struct game 
+- [x] struct game and map 
+
+Resources 
+- [To loop through a map](https://www.codegrepper.com/code-examples/cpp/how+to+loop+through+map+c%2B%2B)
+- [Find element in a map](https://www.cplusplus.com/reference/map/map/find/)

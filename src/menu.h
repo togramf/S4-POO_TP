@@ -1,5 +1,4 @@
-#include "hangman.hpp"
-#include "play_guess_the_number.h"
+#pragma once
 
 void show_list_of_commands();
 void show_menu();
