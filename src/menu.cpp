@@ -1,10 +1,24 @@
 #include "menu.h"
+#include <functional>
+#include <map>
+#include "hangman.hpp"
+#include "play_guess_the_number.h"
+
+struct Game {
+    std::string           name;
+    std::function<void()> play;
+};
+
+static const std::map<char, Game> games{
+    {'1', {"Guess the Number", play_guess_the_number}},
+    {'2', {"Hangman", play_hangman}}};
 
 void show_list_of_commands()
 {
     std::cout << "What do you want to do?\n";
-    std::cout << "  1: Play 'Guess the Number'\n";
-    std::cout << "  2: Play 'Hangman'\n";
+    for (auto& [command, game] : games) {
+        std::cout << "  " << command << ": Play '" << game.name << "'\n";
+    }
     std::cout << "  q: Quit\n";
 }
 
@@ -19,13 +33,12 @@ void show_menu()
             quit = true;
         }
         else {
-            switch (command) {
-            case '1':
-                play_guess_the_number();
-                break;
-            case '2':
-                play_hangman();
-                break;
+            const auto it = games.find(command);
+            if (it != games.end()) {
+                it->second.play();
+            }
+            else {
+                std::cout << "Invalid command\n";
             }
         }
     }
