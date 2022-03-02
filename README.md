@@ -169,3 +169,13 @@ Game :
 Resources 
 - [To loop through a map](https://www.codegrepper.com/code-examples/cpp/how+to+loop+through+map+c%2B%2B)
 - [Find element in a map](https://www.cplusplus.com/reference/map/map/find/)
+
+### Noughts and Crosses 
+
+- [x] install p6 as submodule
+- [x] display an empty window
+- [x] display a grid in the window 
+- [ ] detect cells and hoover
+
+Resources 
+- [Making things with p6](https://julesfouchy.github.io/p6-docs/)
