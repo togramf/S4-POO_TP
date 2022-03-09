@@ -172,11 +172,20 @@ Resources
 
 ### Noughts and Crosses 
 
-- [x] install p6 as submodule
+ideas : 
+refer to cells with index ? a tab ? 
+first : only take mouse click to place nought/cross ? in order to code the game 
+then : to hoover, convert mouse position to corresponding cell ? 
+
+
+- [ ] install p6 as submodule 
+    - [x] fork repo
+    - [ ] correct problems 
 - [x] display an empty window
 - [x] display a grid in the window 
 - [x] separate the code and the main and update the menu
 - [ ] detect cells and hoover
+
 
 Resources 
 - [Making things with p6](https://julesfouchy.github.io/p6-docs/)
