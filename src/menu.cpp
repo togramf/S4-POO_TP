@@ -1,8 +1,9 @@
 #include "menu.h"
 #include <functional>
 #include <map>
+#include "guess_the_number.h"
 #include "hangman.hpp"
-#include "play_guess_the_number.h"
+#include "noughts_and_crosses.hpp"
 
 struct Game {
     std::string           name;
@@ -11,7 +12,8 @@ struct Game {
 
 static const std::map<char, Game> games{
     {'1', {"Guess the Number", play_guess_the_number}},
-    {'2', {"Hangman", play_hangman}}};
+    {'2', {"Hangman", play_hangman}},
+    {'3', {"Noughts & Crosses", play_noughts_and_crosses}}};
 
 void show_list_of_commands()
 {
@@ -26,6 +28,7 @@ void show_menu()
 {
     bool quit = false;
     while (!quit) {
+        // draw_menu();
         show_list_of_commands();
         const auto command = get_input_from_user<char>();
         if (command == 'q') {
@@ -42,4 +45,10 @@ void show_menu()
             }
         }
     }
+}
+
+void draw_menu()
+{
+    auto ctx = p6::Context{{1000, 800, "Jeux d'IMAC"}};
+    ctx.start();
 }

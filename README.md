@@ -175,6 +175,7 @@ Resources
 - [x] install p6 as submodule
 - [x] display an empty window
 - [x] display a grid in the window 
+- [x] separate the code and the main and update the menu
 - [ ] detect cells and hoover
 
 Resources 
