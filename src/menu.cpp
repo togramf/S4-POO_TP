@@ -1,6 +1,7 @@
 #include "menu.h"
 #include <functional>
 #include <map>
+#include "get_input_from_user.h"
 #include "guess_the_number.h"
 #include "hangman.hpp"
 #include "noughts_and_crosses.hpp"

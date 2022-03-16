@@ -35,10 +35,13 @@ Clang tidy
 
 #### Naming
 Take the time to rename whenever you notice a name that is not quite accurate!
-Good name = consise + descriptive
+
+**Good name = consise + descriptive**
 
 Boolean as question to make clear what true and false mean
+
 no abbreviations
+
 append "out" to non-const reference parameters
 
 - [ ] watch from 41:30 [Kevlin Henney, Clean Coders Hate What Happens to Your Code When You Use These Enterprise Programming Tricks](https://youtu.be/FyCYva9DhsI?t=2490)
@@ -50,7 +53,7 @@ append "out" to non-const reference parameters
     - but a `std::unique_ptr` or a `std::shared_ptr`
 
 #### Consistency in style
-separate words ? `snake_case` 
+separate words for example `snake_case` 
 
 ### Level 2
 
@@ -142,23 +145,28 @@ polymorphism :
 ### Guess the number 
 
 - [x] make it work
-- [ ] make it prettier 
+- [x] make it prettier 
 
 - [x] add a score counter
-- [ ] correct display of score (not really clean) 
+- [x] correct display of score (not really clean) 
+
+Ideas : 
+- [ ] see the score for a random player ? 
+
 
 ### Hangman 
 
 Aside : 
 - [x] isolate rand function
-- [ ] turn rand in template
+- [x] turn rand in template
 - [x] isolate get_input_from_a_user 
 - [x] turn it into a template 
 
 Game :
 - [x] first functionning version 
 - [x] make prettier 
-- [ ] bonus class
+- [x] bonus class (wordWithMissingLetters)
+- [x] add congrats and reproaches words and a random display of them
 
 ### Adding a menu 
 
@@ -172,15 +180,16 @@ Resources
 
 ### Noughts and Crosses 
 
-ideas : 
+Ideas : 
 refer to cells with index ? a tab ? 
 first : only take mouse click to place nought/cross ? in order to code the game 
 then : to hoover, convert mouse position to corresponding cell ? 
 
 
-- [ ] install p6 as submodule 
+- [x] install p6 as submodule 
     - [x] fork repo
-    - [ ] correct problems 
+    - [x] correct problems 
+    - [ ] pull request ? (stand by)
 - [x] display an empty window
 - [x] display a grid in the window 
 - [x] separate the code and the main and update the menu
