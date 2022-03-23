@@ -142,6 +142,9 @@ polymorphism :
 
 ## TP
 
+General Notes: 
+- [ ] STOP: copy of string in argument
+
 ### Guess the number 
 
 - [x] make it work
@@ -152,6 +155,10 @@ polymorphism :
 
 Ideas : 
 - [ ] see the score for a random player ? 
+
+Corrections:
+- [ ] D.R.Y. problem: `int int_user = get_input_from_user<int>(min, max);`
+- [x] rename `score` => `number_of_tries`
 
 
 ### Hangman 
@@ -194,6 +201,8 @@ then : to hoover, convert mouse position to corresponding cell ?
 - [x] display a grid in the window 
 - [x] separate the code and the main and update the menu
 - [ ] detect cells and hoover
+    - [x] position -> cell index
+    - [ ] cell_index -> position
 
 
 Resources 
