@@ -200,10 +200,15 @@ then : to hoover, convert mouse position to corresponding cell ?
 - [x] display an empty window
 - [x] display a grid in the window 
 - [x] separate the code and the main and update the menu
-- [ ] detect cells and hoover
+- [x] detect cells and hoover : `T map(T x, T from_min, T from_max, T to_min, T to_max);`
     - [x] position -> cell index
-    - [ ] cell_index -> position
+    - [x] cell_index -> position
+    - [x] use std::optional 
+- [ ] draw noughts and crosses
+    - [x] noughts
+    - [ ] cross : come back here
 
 
 Resources 
 - [Making things with p6](https://julesfouchy.github.io/p6-docs/)
+- [std::optional](https://en.cppreference.com/w/cpp/utility/optional)
