@@ -208,9 +208,11 @@ problem : fix noughts and crosses when mouse_pressed
 - [X] draw noughts and crosses
     - [x] nought
     - [X] cross
-- [ ] fix noughts and crosses on click 
+- [x] fix noughts and crosses on click 
+    - [x] class Board to store the state of the game 
+    - [x] function to draw shapes according to the state of the board
 
 
 Resources 
 - [Making things with p6](https://julesfouchy.github.io/p6-docs/)
-- [std::optional](https://en.cppreference.com/w/cpp/utility/optional)
+- [std::optional](https://en.cppreference.com/w/cpp/utility/optional) 

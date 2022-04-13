@@ -15,6 +15,10 @@ struct CellIndex {
 template<int size>
 class Board {
 public:
+    Board()
+        : _state(size * size, std::nullopt)
+    {
+    }
     std::optional<Player>& operator[](CellIndex index)
     {
         return _state[index._x + size * index._y];
@@ -26,7 +30,7 @@ public:
     }
 
 private:
-    std::vector<std::optional<Player>> _state; 
+    std::vector<std::optional<Player>> _state;
 };
 
 //Conversion between positions in the window and cell index
@@ -63,12 +67,12 @@ void draw_mouse(glm::vec2 position, p6::Context& ctx)
     ctx.circle(p6::Center{position}, p6::Radius{0.05f});
 }
 
-void settings_to_draw_board (p6::Context& ctx) 
+void settings_to_draw_board(p6::Context& ctx)
 {
-        ctx.stroke_weight = 0.01f;
-        ctx.use_fill      = true;
-        ctx.stroke        = {.9f, .9f, .9f, .9f};
-        ctx.fill          = {0.35f, 0.35f, 0.35f, 1.f};
+    ctx.stroke_weight = 0.01f;
+    ctx.use_fill      = true;
+    ctx.stroke        = {.9f, .9f, .9f, .9f};
+    ctx.fill          = {0.35f, 0.35f, 0.35f, 1.f};
 }
 
 void draw_cell(const int size, p6::Context& ctx, const CellIndex index)
@@ -89,23 +93,21 @@ void draw_board(const int size, p6::Context& ctx)
     }
 }
 
-void settings_to_draw_shapes(p6::Context& ctx) 
+void settings_to_draw_shapes(p6::Context& ctx)
 {
-    ctx.stroke_weight  = 0.1f;
-    ctx.use_fill       = false;
-    ctx.stroke         = {.0f, .0f, .0f, 1.f};
+    ctx.stroke_weight = 0.1f;
+    ctx.use_fill      = false;
+    ctx.stroke        = {.0f, .0f, .0f, 1.f};
 }
 
 void draw_nought(int size, p6::Context& ctx, glm::vec2 position)
 {
-    settings_to_draw_shapes(ctx);
     ctx.circle(p6::Center{position + glm::vec2{1.f / static_cast<float>(size), ctx.aspect_ratio() / static_cast<float>(size)}},
                p6::Radius{0.3f});
 }
 
 void draw_cross(int size, p6::Context& ctx, glm::vec2 position)
 {
-    settings_to_draw_shapes(ctx);
     glm::vec2 cell_size = glm::vec2{1.f / static_cast<float>(size), ctx.aspect_ratio() / static_cast<float>(size)};
     ctx.rectangle(p6::Center{position + glm::vec2{1.f / static_cast<float>(size), ctx.aspect_ratio() / static_cast<float>(size)}},
                   p6::Radii{cell_size.x * 0.8f, cell_size.y * 0.2f}, p6::Rotation{0.80_radians});
@@ -113,41 +115,69 @@ void draw_cross(int size, p6::Context& ctx, glm::vec2 position)
                   p6::Radii{cell_size.x * 0.8f, cell_size.y * 0.2f}, p6::Rotation{-0.80_radians});
 }
 
+void draw_shape(int size, p6::Context& ctx, glm::vec2 position, Player state)
+{
+    settings_to_draw_shapes(ctx);
+    if (state == Player::Noughts)
+        draw_nought(size, ctx, position);
+    else if (state == Player::Crosses) {
+        ctx.use_fill = true;
+        ctx.fill     = {.0f, .0f, .0f, 1.f};
+        draw_cross(size, ctx, position);
+    }
+}
+
 template<int size>
 void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx)
 {
-    // TODO
+    for (int x = 0; x < size; ++x) {
+        for (int y = 0; y < size; ++y) {
+            const auto cell = board[{x, y}];
+            if (cell.has_value()) {
+                draw_shape(size, ctx, cell_index_to_position({x, y}, size, ctx), *cell);
+            }
+        }
+    }
 }
 
 void play_noughts_and_crosses()
 {
-    auto ctx = p6::Context{{800, 800, "Noughts and Crosses"}};
-    static constexpr int size = 3;
-    Board<size> board;
-    ctx.update                = [&]() {
+    auto                 ctx            = p6::Context{{800, 800, "Noughts and Crosses"}};
+    static constexpr int size           = 3;
+    Board<size>          board          = Board<size>{};
+    Player               current_player = Player::Crosses;
+
+    ctx.update = [&]() {
         ctx.background({0.f, 0.f, 0.f});
 
         //Drawing the board
         draw_board(size, ctx);
-        
+        draw_noughts_and_crosses(board, ctx);
+
         //Drawing the hovered cell
         if (cell_hovered(ctx.mouse(), size, ctx).has_value()) {
-            ctx.fill = {0.50f, 0.35f, 0.35f, 1.f};
-            draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size, ctx));
-            draw_cross(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx));
+            if (!board[*cell_hovered(ctx.mouse(), size, ctx)].has_value()) {
+                settings_to_draw_board(ctx);
+                ctx.fill = {0.50f, 0.35f, 0.35f, 1.f};
+                draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size, ctx));
+                draw_shape(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx), current_player);
+            }
         }
 
         //Drawing the mouse
         draw_mouse(ctx.mouse(), ctx);
-
     };
     ctx.mouse_moved = [&](auto) {
     };
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size, ctx);
-        std::cout << index._x + size * index._y << " = ( "<< index._x << " ; " << index._y << " )"<<std::endl;
-        // draw_cross(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx));
+
+        //Drawing the shape on the click
+        if (!board[index].has_value()) {
+            board[{index._x, index._y}] = current_player;
+            current_player              = (current_player == Player::Crosses) ? Player::Noughts : Player::Crosses;
+        }
     };
     ctx.start();
 }
