@@ -157,7 +157,7 @@ Ideas :
 - [ ] see the score for a random player ? 
 
 Corrections:
-- [ ] D.R.Y. problem: `int int_user = get_input_from_user<int>(min, max);`
+- [x] D.R.Y. problem: `int int_user = get_input_from_user<int>(min, max);`
 - [x] rename `score` => `number_of_tries`
 
 
@@ -186,14 +186,7 @@ Resources
 - [Find element in a map](https://www.cplusplus.com/reference/map/map/find/)
 
 ### Noughts and Crosses 
-
-Ideas : 
-refer to cells with index ? a tab ? 
-first : only take mouse click to place nought/cross ? in order to code the game 
-then : to hoover, convert mouse position to corresponding cell 
-problem : fix noughts and crosses when mouse_pressed
-
-
+ 
 - [x] install p6 as submodule 
     - [x] fork repo
     - [x] correct problems 
@@ -211,8 +204,14 @@ problem : fix noughts and crosses when mouse_pressed
 - [x] fix noughts and crosses on click 
     - [x] class Board to store the state of the game 
     - [x] function to draw shapes according to the state of the board
+- [ ] check for the end of the game 
+    - [ ] check that the board is full 
+    - [ ] check that a player has won 
+- [ ] clean the code
 
 
 Resources 
 - [Making things with p6](https://julesfouchy.github.io/p6-docs/)
 - [std::optional](https://en.cppreference.com/w/cpp/utility/optional) 
+
+### Connect 4  

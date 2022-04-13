@@ -33,6 +33,20 @@ private:
     std::vector<std::optional<Player>> _state;
 };
 
+//Function for the board
+template<int size>
+bool is_the_board_full(const Board<size>& board)
+{
+    for (int x = 0; x < size; ++x) {
+        for (int y = 0; y < size; ++y) {
+            if (!board[{x, y}].has_value()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 //Conversion between positions in the window and cell index
 void position_to_cell_index(const glm::vec2 position, CellIndex& cell, const int size, const p6::Context& ctx)
 {
@@ -177,6 +191,7 @@ void play_noughts_and_crosses()
         if (!board[index].has_value()) {
             board[{index._x, index._y}] = current_player;
             current_player              = (current_player == Player::Crosses) ? Player::Noughts : Player::Crosses;
+            std::cout << is_the_board_full(board) << std::endl;
         }
     };
     ctx.start();
