@@ -190,7 +190,8 @@ Resources
 Ideas : 
 refer to cells with index ? a tab ? 
 first : only take mouse click to place nought/cross ? in order to code the game 
-then : to hoover, convert mouse position to corresponding cell ? 
+then : to hoover, convert mouse position to corresponding cell 
+problem : fix noughts and crosses when mouse_pressed
 
 
 - [x] install p6 as submodule 
@@ -204,9 +205,10 @@ then : to hoover, convert mouse position to corresponding cell ?
     - [x] position -> cell index
     - [x] cell_index -> position
     - [x] use std::optional 
-- [ ] draw noughts and crosses
-    - [x] noughts
-    - [ ] cross : come back here
+- [X] draw noughts and crosses
+    - [x] nought
+    - [X] cross
+- [ ] fix noughts and crosses on click 
 
 
 Resources 
