@@ -2,9 +2,31 @@
 #include <iostream>
 #include <optional>
 
+enum class Player {
+    Noughts,
+    Crosses,
+};
+
 struct CellIndex {
     int _x;
     int _y;
+};
+
+template<int size>
+class Board {
+public:
+    std::optional<Player>& operator[](CellIndex index)
+    {
+        return _state[index._x + size * index._y];
+    }
+
+    const std::optional<Player>& operator[](CellIndex index) const
+    {
+        return _state[index._x + size * index._y];
+    }
+
+private:
+    std::vector<std::optional<Player>> _state; 
 };
 
 //Conversion between positions in the window and cell index
@@ -91,22 +113,30 @@ void draw_cross(int size, p6::Context& ctx, glm::vec2 position)
                   p6::Radii{cell_size.x * 0.8f, cell_size.y * 0.2f}, p6::Rotation{-0.80_radians});
 }
 
+template<int size>
+void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx)
+{
+    // TODO
+}
+
 void play_noughts_and_crosses()
 {
     auto ctx = p6::Context{{800, 800, "Noughts and Crosses"}};
     static constexpr int size = 3;
+    Board<size> board;
     ctx.update                = [&]() {
         ctx.background({0.f, 0.f, 0.f});
 
         //Drawing the board
         draw_board(size, ctx);
-
+        
         //Drawing the hovered cell
         if (cell_hovered(ctx.mouse(), size, ctx).has_value()) {
             ctx.fill = {0.50f, 0.35f, 0.35f, 1.f};
             draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size, ctx));
             draw_cross(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx));
         }
+
         //Drawing the mouse
         draw_mouse(ctx.mouse(), ctx);
 
@@ -114,7 +144,10 @@ void play_noughts_and_crosses()
     ctx.mouse_moved = [&](auto) {
     };
     ctx.mouse_pressed = [&](auto) {
-        draw_cross(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx));
+        CellIndex index;
+        position_to_cell_index(ctx.mouse(), index, size, ctx);
+        std::cout << index._x + size * index._y << " = ( "<< index._x << " ; " << index._y << " )"<<std::endl;
+        // draw_cross(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx));
     };
     ctx.start();
 }
