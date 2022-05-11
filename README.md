@@ -204,10 +204,11 @@ Resources
 - [x] fix noughts and crosses on click 
     - [x] class Board to store the state of the game 
     - [x] function to draw shapes according to the state of the board
-- [ ] check for the end of the game 
-    - [ ] check that the board is full 
-    - [ ] check that a player has won 
+- [x] check for the end of the game 
+    - [x] check that the board is full 
+    - [x] check that a player has won 
 - [ ] clean the code
+    - [ ] congratulation messages in separate functions
 
 
 Resources 

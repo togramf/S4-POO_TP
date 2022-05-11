@@ -33,7 +33,7 @@ private:
     std::vector<std::optional<Player>> _state;
 };
 
-//Function for the board
+//Function for the board and the end of the game
 template<int size>
 bool is_the_board_full(const Board<size>& board)
 {
@@ -44,7 +44,53 @@ bool is_the_board_full(const Board<size>& board)
             }
         }
     }
+    std::cout << "It's a draw, congratulations to all !\n";
     return true;
+}
+
+template<int size>
+std::optional<Player> check_for_winner_on_line(const Board<size>& board, const CellIndex cell, const CellIndex direction)
+{
+    std::optional<Player> player_value;
+    CellIndex cell2 = {cell._x + direction._x, cell._y + direction._y};
+    CellIndex cell3 = {cell._x + 2*direction._x, cell._y + 2*direction._y};
+
+    if (board[cell].has_value() && board[cell2].has_value() && board[cell3].has_value()){
+        player_value = board[cell];
+        if (board[cell2] == player_value && board[cell3] == player_value){
+            if (player_value.value() == Player::Crosses)
+                std::cout << "Congratulations ! 'Crosses' won the game !\n";
+            else 
+                std::cout << "Congratulations ! 'Noughts' won the game !\n";
+            return player_value;
+        } 
+    }
+    return std::nullopt;
+}
+
+template<int size>
+bool has_a_player_won(const Board<size>& board)
+{
+    // check for a complete diagonal on (0,1) and (0,2)
+    // check for a complete column   on every (x,0)
+    // check for a complete line     on every (0,y)
+    
+    bool a_player_has_won = false;
+    if (check_for_winner_on_line(board, {0,0}, {1,1}).has_value() || check_for_winner_on_line(board, {0,2}, {1,-1}).has_value())
+        a_player_has_won = true;
+    else {
+        for (int x = 0; x < size; ++x) {
+            if (check_for_winner_on_line(board, {x,0}, {0,1}).has_value() || check_for_winner_on_line(board, {0,x}, {1,0}).has_value())
+                a_player_has_won = true;
+        }
+    }
+    return a_player_has_won;
+}
+
+template<int size>
+bool is_the_game_finished(const Board<size>& board)
+{
+    return (has_a_player_won(board) || is_the_board_full(board));
 }
 
 //Conversion between positions in the window and cell index
@@ -191,7 +237,8 @@ void play_noughts_and_crosses()
         if (!board[index].has_value()) {
             board[{index._x, index._y}] = current_player;
             current_player              = (current_player == Player::Crosses) ? Player::Noughts : Player::Crosses;
-            std::cout << is_the_board_full(board) << std::endl;
+            if (is_the_game_finished(board))
+                ctx.stop();
         }
     };
     ctx.start();
