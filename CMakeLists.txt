@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 
 project(SimpleCpp)
 add_executable(${PROJECT_NAME})
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
 # Enable many good warnings
 if (MSVC)

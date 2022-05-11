@@ -5,6 +5,7 @@
 #include "guess_the_number.h"
 #include "hangman.hpp"
 #include "noughts_and_crosses.hpp"
+#include "connect_4.hpp"
 
 struct Game {
     std::string           name;
@@ -14,7 +15,8 @@ struct Game {
 static const std::map<char, Game> games{
     {'1', {"Guess the Number", play_guess_the_number}},
     {'2', {"Hangman", play_hangman}},
-    {'3', {"Noughts & Crosses", play_noughts_and_crosses}}};
+    {'3', {"Noughts & Crosses", play_noughts_and_crosses}},
+    {'4', {"Connect 4", play_connect_4}}};
 
 void show_list_of_commands()
 {

@@ -216,3 +216,8 @@ Resources
 - [std::optional](https://en.cppreference.com/w/cpp/utility/optional) 
 
 ### Connect 4  
+
+- [x] move some code from Noughts and Crosses to draw the board
+- [x] correct the board to have more colums than rows
+- [x] separate the board functions in another file
+- [ ] draw coins
