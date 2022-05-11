@@ -95,7 +95,7 @@ void settings_to_draw_shapes(p6::Context& ctx)
 void draw_nought(BoardSize size, p6::Context& ctx, glm::vec2 position)
 {
     ctx.circle(p6::Center{position + glm::vec2{1.f / static_cast<float>(size._width), ctx.aspect_ratio() / static_cast<float>(size._height)}},
-               p6::Radius{0.3f});
+               p6::Radius{.8f / static_cast<float>(size._height)});
 }
 
 void draw_cross(BoardSize size, p6::Context& ctx, glm::vec2 position)
@@ -126,7 +126,7 @@ void draw_noughts_and_crosses(const Board<size, Player>& board, p6::Context& ctx
         for (int y = 0; y < size._height; ++y) {
             const auto cell = board[{x, y}];
             if (cell.has_value()) {
-                draw_shape(size, ctx, cell_index_to_position({x, y}, size, ctx), *cell);
+                draw_shape(size, ctx, cell_index_to_position({x, y}, size), *cell);
             }
         }
     }
@@ -152,7 +152,7 @@ void play_noughts_and_crosses()
                 settings_to_draw_board(ctx);
                 ctx.fill = {0.50f, 0.35f, 0.35f, 1.f};
                 draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size, ctx));
-                draw_shape(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size, ctx), current_player);
+                draw_shape(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size), current_player);
             }
         }
 

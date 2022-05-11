@@ -220,4 +220,5 @@ Resources
 - [x] move some code from Noughts and Crosses to draw the board
 - [x] correct the board to have more colums than rows
 - [x] separate the board functions in another file
-- [ ] draw coins
+- [x] draw coins
+- [ ] play in column
