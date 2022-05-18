@@ -30,15 +30,17 @@ public:
         return _state[index._x + size._width * index._y];
     }
 
-    // const int height() const
-    // {
-    //     return size._height;
-    // }
-
-    // const int width() const
-    // {
-    //     return size._width;
-    // }
+    bool is_the_board_full() const
+    {
+        for (int x = 0; x < size._width; ++x) {
+            for (int y = 0; y < size._height; ++y) {
+                if (!_state[x + size._width * y].has_value()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 private:
     std::vector<std::optional<Player>> _state;

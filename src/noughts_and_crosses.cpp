@@ -8,19 +8,19 @@ enum class Player {
 };
 
 //Function for the board and the end of the game
-template<BoardSize size>
-bool is_the_board_full(const Board<size, Player>& board)
-{
-    for (int x = 0; x < size._width; ++x) {
-        for (int y = 0; y < size._height; ++y) {
-            if (!board[{x, y}].has_value()) {
-                return false;
-            }
-        }
-    }
-    std::cout << "It's a draw, congratulations to all !\n";
-    return true;
-}
+// template<BoardSize size>
+// bool is_the_board_full(const Board<size, Player>& board)
+// {
+//     for (int x = 0; x < size._width; ++x) {
+//         for (int y = 0; y < size._height; ++y) {
+//             if (!board[{x, y}].has_value()) {
+//                 return false;
+//             }
+//         }
+//     }
+//     std::cout << "It's a draw, congratulations to all !\n";
+//     return true;
+// }
 
 template<BoardSize size>
 std::optional<Player> check_for_winner_on_line(const Board<size, Player>& board, const CellIndex cell, const CellIndex direction)
@@ -64,7 +64,7 @@ bool has_a_player_won(const Board<size, Player>& board)
 template<BoardSize size>
 bool is_the_game_finished(const Board<size, Player>& board)
 {
-    return (has_a_player_won(board) || is_the_board_full(board));
+    return (has_a_player_won(board) || board.is_the_board_full());
 }
 
 std::optional<CellIndex> cell_hovered(const glm::vec2 position, const BoardSize size, const p6::Context& ctx)
@@ -159,8 +159,7 @@ void play_noughts_and_crosses()
         //Drawing the mouse
         draw_mouse(ctx.mouse(), ctx);
     };
-    ctx.mouse_moved = [&](auto) {
-    };
+
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size, ctx);

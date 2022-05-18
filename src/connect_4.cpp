@@ -27,6 +27,22 @@ std::optional<int> lowest_empty_row_index(const Board<size, Player>& board, cons
     return std::nullopt;
 }
 
+//Functions for the end of the game
+template<BoardSize size>
+bool has_the_player_won(const Board<size, Player>& board, const Player player, const CellIndex new_coin)
+{
+    //check for an alignment of 4 coins around the new coin played
+    if (board[new_coin] != player)
+        return true;
+    return false;
+}
+
+template<BoardSize size>
+bool is_the_game_finished(const Board<size, Player>& board, const Player player, const CellIndex new_coin)
+{
+    return (has_the_player_won(board, player, new_coin) || board.is_the_board_full());
+}
+
 //Drawing functions
 void settings_to_draw_coin(p6::Context& ctx, Player state)
 {
@@ -84,18 +100,20 @@ void play_connect_4()
             }
         }
     };
+
+    //On click, if possible draw the coin and change player
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size, ctx);
         std::optional<int> y = lowest_empty_row_index(board, index._x);
 
-        //Drawing the shape on the click
-        if (y.has_value() && !board[{index._x, *y}].has_value()) {
+        if (y.has_value()) {
             board[{index._x, *y}] = current_player;
-            current_player        = (current_player == Player::Yellow) ? Player::Red : Player::Yellow;
-            // if (is_the_game_finished(board))
-            //     ctx.stop();
+            if (is_the_game_finished(board, current_player, {index._x, *y}))
+                ctx.stop();
+            current_player = (current_player == Player::Yellow) ? Player::Red : Player::Yellow;
         }
     };
+
     ctx.start();
 }
