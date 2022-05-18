@@ -30,6 +30,16 @@ public:
         return _state[index._x + size._width * index._y];
     }
 
+    // const int height() const
+    // {
+    //     return size._height;
+    // }
+
+    // const int width() const
+    // {
+    //     return size._width;
+    // }
+
 private:
     std::vector<std::optional<Player>> _state;
 };

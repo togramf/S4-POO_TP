@@ -17,6 +17,16 @@ std::optional<CellIndex> hovered_cell(const glm::vec2 position, const BoardSize 
     return std::nullopt;
 }
 
+template<BoardSize size>
+std::optional<int> lowest_empty_row_index(const Board<size, Player>& board, const int column_index)
+{
+    for (int y = 0; y < size._height; ++y) {
+        if (!board[{column_index, y}].has_value())
+            return std::make_optional(y);
+    }
+    return std::nullopt;
+}
+
 //Drawing functions
 void settings_to_draw_coin(p6::Context& ctx, Player state)
 {
@@ -29,11 +39,10 @@ void settings_to_draw_coin(p6::Context& ctx, Player state)
         ctx.fill = {1.f, 1.f, .0f, 1.f};
 }
 
-//FONCTION A REVOIR
 void draw_coin(BoardSize size, p6::Context& ctx, glm::vec2 position, Player state)
 {
     settings_to_draw_coin(ctx, state);
-    ctx.circle(p6::Center{position + glm::vec2{1.f / static_cast<float>(size._width), board_ratio(size) / static_cast<float>(size._height)}},
+    ctx.circle(p6::Center{position + glm::vec2{board_ratio(size) / static_cast<float>(size._width), 1.f / static_cast<float>(size._height)}},
                p6::Radius{.8f / static_cast<float>(size._height)});
 }
 
@@ -78,11 +87,12 @@ void play_connect_4()
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size, ctx);
+        std::optional<int> y = lowest_empty_row_index(board, index._x);
 
         //Drawing the shape on the click
-        if (!board[index].has_value()) {
-            board[{index._x, index._y}] = current_player;
-            current_player              = (current_player == Player::Yellow) ? Player::Red : Player::Yellow;
+        if (y.has_value() && !board[{index._x, *y}].has_value()) {
+            board[{index._x, *y}] = current_player;
+            current_player        = (current_player == Player::Yellow) ? Player::Red : Player::Yellow;
             // if (is_the_game_finished(board))
             //     ctx.stop();
         }

@@ -221,4 +221,8 @@ Resources
 - [x] correct the board to have more colums than rows
 - [x] separate the board functions in another file
 - [x] draw coins
-- [ ] play in column
+- [x] play in column : basic version
+- [ ] check for the end of the game 
+    - [ ] check that the board is full 
+    - [ ] check that a player has won 
+- [ ] correct problem with the mouse 
