@@ -225,5 +225,5 @@ Resources
 - [x] check for the end of the game 
     - [x] check that the board is full 
     - [x] check that a player has won : check in the 4 directions if 4 coins are aligned 
-- [ ] display a message wwhen the game is over
+- [x] display a message wwhen the game is over
 - [ ] correct problem with the mouse 

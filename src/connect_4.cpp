@@ -1,5 +1,7 @@
 #include "connect_4.hpp"
+#include <chrono>
 #include <iostream>
+#include <thread>
 #include "board.hpp"
 
 enum class Player {
@@ -64,9 +66,18 @@ bool has_the_player_won(const Board<size, Player>& board, const Player player, c
 template<BoardSize size>
 bool is_the_game_finished(const Board<size, Player>& board, const Player player, const CellIndex new_coin)
 {
-    if (board.is_the_board_full())
+    if (board.is_the_board_full()) {
         std::cout << "It's a draw ! \n";
-    return (has_the_player_won(board, player, new_coin) || board.is_the_board_full());
+        return true;
+    }
+    else if (has_the_player_won(board, player, new_coin)) {
+        if (player == Player::Red)
+            std::cout << "Congratulations ! 'Red Coins' won the game !\n";
+        else
+            std::cout << "Congratulations ! 'Yellow Coins' won the game !\n";
+        return true;
+    }
+    return false;
 }
 
 //Drawing functions
@@ -112,7 +123,7 @@ void play_connect_4()
     ctx.update = [&]() {
         ctx.background({0.f, 0.f, 0.f});
 
-        //Drawing the board
+        //Drawing the board and its content
         draw_board(size, ctx);
         draw_coins(board, ctx);
 
@@ -127,7 +138,7 @@ void play_connect_4()
         }
     };
 
-    //On click, if possible draw the coin and change player
+    //On click, if possible draw the coin, check if the game is over and change player
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size, ctx);
@@ -135,8 +146,11 @@ void play_connect_4()
 
         if (y.has_value()) {
             board[{index._x, *y}] = current_player;
-            if (is_the_game_finished(board, current_player, {index._x, *y}))
+            if (is_the_game_finished(board, current_player, {index._x, *y})) {
+                using namespace std::chrono_literals;
+                std::this_thread::sleep_for(2s);
                 ctx.stop();
+            }
             current_player = (current_player == Player::Yellow) ? Player::Red : Player::Yellow;
         }
     };
