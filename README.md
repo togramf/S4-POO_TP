@@ -222,7 +222,8 @@ Resources
 - [x] separate the board functions in another file
 - [x] draw coins
 - [x] play in column : basic version
-- [ ] check for the end of the game 
-    - [ ] check that the board is full 
-    - [ ] check that a player has won 
+- [x] check for the end of the game 
+    - [x] check that the board is full 
+    - [x] check that a player has won : check in the 4 directions if 4 coins are aligned 
+- [ ] display a message wwhen the game is over
 - [ ] correct problem with the mouse 

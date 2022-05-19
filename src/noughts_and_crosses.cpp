@@ -7,21 +7,6 @@ enum class Player {
     Crosses,
 };
 
-//Function for the board and the end of the game
-// template<BoardSize size>
-// bool is_the_board_full(const Board<size, Player>& board)
-// {
-//     for (int x = 0; x < size._width; ++x) {
-//         for (int y = 0; y < size._height; ++y) {
-//             if (!board[{x, y}].has_value()) {
-//                 return false;
-//             }
-//         }
-//     }
-//     std::cout << "It's a draw, congratulations to all !\n";
-//     return true;
-// }
-
 template<BoardSize size>
 std::optional<Player> check_for_winner_on_line(const Board<size, Player>& board, const CellIndex cell, const CellIndex direction)
 {

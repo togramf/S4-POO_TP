@@ -29,17 +29,43 @@ std::optional<int> lowest_empty_row_index(const Board<size, Player>& board, cons
 
 //Functions for the end of the game
 template<BoardSize size>
+int number_of_coin_in_direction(const Board<size, Player>& board, const Player player, const CellIndex new_coin, const CellIndex direction, int orientation)
+{
+    CellIndex position;
+    int       nb_of_coins_in_orientation = 0;
+    int       i                          = 1;
+
+    while (i > 0) {
+        position = {new_coin._x + i * orientation * direction._x, new_coin._y + i * orientation * direction._y};
+        if (board[position].has_value() && (board[position] == player)) {
+            nb_of_coins_in_orientation++;
+            i++;
+        }
+        else
+            i = -1;
+    }
+    return nb_of_coins_in_orientation;
+}
+
+template<BoardSize size>
+bool check_for_winner_in_direction(const Board<size, Player>& board, const Player player, const CellIndex new_coin, const CellIndex direction)
+{
+    int nb_of_coins_in_direction = 1 + number_of_coin_in_direction(board, player, new_coin, direction, 1) + number_of_coin_in_direction(board, player, new_coin, direction, -1);
+    return (nb_of_coins_in_direction >= 4) ? true : false;
+}
+
+template<BoardSize size>
 bool has_the_player_won(const Board<size, Player>& board, const Player player, const CellIndex new_coin)
 {
-    //check for an alignment of 4 coins around the new coin played
-    if (board[new_coin] != player)
-        return true;
-    return false;
+    //check for an alignment of 4 coins around the new coin played in 4 directions
+    return (check_for_winner_in_direction(board, player, new_coin, {1, 0}) || check_for_winner_in_direction(board, player, new_coin, {0, 1}) || check_for_winner_in_direction(board, player, new_coin, {1, 1}) || check_for_winner_in_direction(board, player, new_coin, {1, -1}));
 }
 
 template<BoardSize size>
 bool is_the_game_finished(const Board<size, Player>& board, const Player player, const CellIndex new_coin)
 {
+    if (board.is_the_board_full())
+        std::cout << "It's a draw ! \n";
     return (has_the_player_won(board, player, new_coin) || board.is_the_board_full());
 }
 
