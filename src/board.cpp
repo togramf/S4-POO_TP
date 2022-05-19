@@ -7,9 +7,9 @@ float board_ratio(BoardSize size)
 }
 
 //Conversion between positions in the window and cell index
-void position_to_cell_index(const glm::vec2 position, CellIndex& cell, const BoardSize size, const p6::Context& ctx)
+void position_to_cell_index(const glm::vec2 position, CellIndex& cell, const BoardSize size)
 {
-    cell._x = static_cast<int>(p6::map(position.x, -ctx.aspect_ratio(), ctx.aspect_ratio(), 0.f, static_cast<float>(size._width)));
+    cell._x = static_cast<int>(p6::map(position.x, -board_ratio(size), board_ratio(size), 0.f, static_cast<float>(size._width)));
     cell._y = static_cast<int>(p6::map(position.y, -1.f, 1.f, 0.f, static_cast<float>(size._height)));
 }
 

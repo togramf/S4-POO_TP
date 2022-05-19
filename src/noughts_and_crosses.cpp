@@ -52,10 +52,10 @@ bool is_the_game_finished(const Board<size, Player>& board)
     return (has_a_player_won(board) || board.is_the_board_full());
 }
 
-std::optional<CellIndex> cell_hovered(const glm::vec2 position, const BoardSize size, const p6::Context& ctx)
+std::optional<CellIndex> cell_hovered(const glm::vec2 position, const BoardSize size)
 {
     CellIndex index;
-    position_to_cell_index(position, index, size, ctx);
+    position_to_cell_index(position, index, size);
     if (index._x >= 0 && index._x < size._width && index._y >= 0 && index._y < size._height) {
         return std::make_optional(index);
     }
@@ -132,12 +132,12 @@ void play_noughts_and_crosses()
         draw_noughts_and_crosses(board, ctx);
 
         //Drawing the hovered cell
-        if (cell_hovered(ctx.mouse(), size, ctx).has_value()) {
-            if (!board[*cell_hovered(ctx.mouse(), size, ctx)].has_value()) {
+        if (cell_hovered(ctx.mouse(), size).has_value()) {
+            if (!board[*cell_hovered(ctx.mouse(), size)].has_value()) {
                 settings_to_draw_board(ctx);
                 ctx.fill = {0.50f, 0.35f, 0.35f, 1.f};
-                draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size, ctx));
-                draw_shape(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size, ctx), size), current_player);
+                draw_cell(size, ctx, *cell_hovered(ctx.mouse(), size));
+                draw_shape(size, ctx, cell_index_to_position(*cell_hovered(ctx.mouse(), size), size), current_player);
             }
         }
 
@@ -147,7 +147,7 @@ void play_noughts_and_crosses()
 
     ctx.mouse_pressed = [&](auto) {
         CellIndex index;
-        position_to_cell_index(ctx.mouse(), index, size, ctx);
+        position_to_cell_index(ctx.mouse(), index, size);
 
         //Drawing the shape on the click
         if (!board[index].has_value()) {

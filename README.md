@@ -6,7 +6,7 @@ Repo forked forked from JulesFouchy/Simple-Cpp-Setup
 
 ### Level 1
 
-#### Use an IDE
+#### Use an IDEs
 VSCode 4ever <3
 - rename : F2
 - go to definition : F12
@@ -24,14 +24,11 @@ gitKraken <3
 #### Debugger
 
 - [x] try 'Run and Debug'
-- [ ] try to place breakpoints
-- [ ] inspect state and call stack
+- [x] try to place breakpoints
+- [x] inspect state and call stack
 
-#### Formatting tool
-Clang format -> doesn't work 
-
-#### Static Analysers 
-Clang tidy 
+#### Formatting tool & Static Analysers 
+Clang format - Clang tidy 
 
 #### Naming
 Take the time to rename whenever you notice a name that is not quite accurate!
@@ -217,6 +214,7 @@ Resources
 
 ### Connect 4  
 
+Make it Work: 
 - [x] move some code from Noughts and Crosses to draw the board
 - [x] correct the board to have more colums than rows
 - [x] separate the board functions in another file
@@ -225,5 +223,9 @@ Resources
 - [x] check for the end of the game 
     - [x] check that the board is full 
     - [x] check that a player has won : check in the 4 directions if 4 coins are aligned 
-- [x] display a message wwhen the game is over
-- [ ] correct problem with the mouse 
+- [x] display a message when the game is over
+
+Make it better: 
+- [x] correct problem with the mouse (slight offset on the edges of the board between the mouse and the cells)
+    - [ ] now when we click outside of the board, the coin is placed in the first column :/ 
+- [x] add a delay of two seconds at the end (I borrowed your code Jules <3)

@@ -47,7 +47,7 @@ private:
 };
 
 float     board_ratio(BoardSize size);
-void      position_to_cell_index(const glm::vec2 position, CellIndex& cell, const BoardSize size, const p6::Context& ctx);
+void      position_to_cell_index(const glm::vec2 position, CellIndex& cell, const BoardSize size);
 glm::vec2 cell_index_to_position(const CellIndex& index, const BoardSize size);
 void      draw_cell(const BoardSize size, p6::Context& ctx, const CellIndex index);
 void      draw_board(const BoardSize size, p6::Context& ctx);
