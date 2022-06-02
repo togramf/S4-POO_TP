@@ -30,20 +30,19 @@ std::optional<Player> check_for_winner_on_line(const Board<size, Player>& board,
 template<BoardSize size>
 bool has_a_player_won(const Board<size, Player>& board)
 {
-    // check for a complete diagonal on (0,1) and (0,2)
-    // check for a complete column   on every (x,0)
-    // check for a complete line     on every (0,y)
-
-    bool a_player_has_won = false;
+    // check for a complete diagonal on corners : (0,0) and (0,2)
     if (check_for_winner_on_line(board, {0, 0}, {1, 1}).has_value() || check_for_winner_on_line(board, {0, 2}, {1, -1}).has_value())
-        a_player_has_won = true;
+        return true;
+
     else {
+        // check for a complete line     on every (0,y)
+        // check for a complete column   on every (x,0)
         for (int x = 0; x < size._width; ++x) {
             if (check_for_winner_on_line(board, {x, 0}, {0, 1}).has_value() || check_for_winner_on_line(board, {0, x}, {1, 0}).has_value())
-                a_player_has_won = true;
+                return true;
         }
     }
-    return a_player_has_won;
+    return false;
 }
 
 template<BoardSize size>
@@ -110,9 +109,8 @@ void draw_noughts_and_crosses(const Board<size, Player>& board, p6::Context& ctx
     for (int x = 0; x < size._width; ++x) {
         for (int y = 0; y < size._height; ++y) {
             const auto cell = board[{x, y}];
-            if (cell.has_value()) {
+            if (cell.has_value())
                 draw_shape(size, ctx, cell_index_to_position({x, y}, size), *cell);
-            }
         }
     }
 }
@@ -149,7 +147,7 @@ void play_noughts_and_crosses()
         CellIndex index;
         position_to_cell_index(ctx.mouse(), index, size);
 
-        //Drawing the shape on the click
+        //Drawing the new shape on the click, change player and check if the game is finished
         if (!board[index].has_value()) {
             board[{index._x, index._y}] = current_player;
             current_player              = (current_player == Player::Crosses) ? Player::Noughts : Player::Crosses;

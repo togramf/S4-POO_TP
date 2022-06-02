@@ -1,15 +1,15 @@
 #include "menu.h"
 #include <functional>
 #include <map>
+#include "connect_4.hpp"
 #include "get_input_from_user.h"
 #include "guess_the_number.h"
 #include "hangman.hpp"
 #include "noughts_and_crosses.hpp"
-#include "connect_4.hpp"
 
 struct Game {
-    std::string           name;
-    std::function<void()> play;
+    std::string           _name;
+    std::function<void()> _play;
 };
 
 static const std::map<char, Game> games{
@@ -22,7 +22,7 @@ void show_list_of_commands()
 {
     std::cout << "What do you want to do?\n";
     for (auto& [command, game] : games) {
-        std::cout << "  " << command << ": Play '" << game.name << "'\n";
+        std::cout << "  " << command << ": Play '" << game._name << "'\n";
     }
     std::cout << "  q: Quit\n";
 }
@@ -31,7 +31,6 @@ void show_menu()
 {
     bool quit = false;
     while (!quit) {
-        // draw_menu();
         show_list_of_commands();
         const auto command = get_input_from_user<char>();
         if (command == 'q') {
@@ -40,18 +39,10 @@ void show_menu()
         }
         else {
             const auto it = games.find(command);
-            if (it != games.end()) {
-                it->second.play();
-            }
-            else {
+            if (it != games.end())
+                it->second._play();
+            else
                 std::cout << "Invalid command\n";
-            }
         }
     }
-}
-
-void draw_menu()
-{
-    auto ctx = p6::Context{{1000, 800, "Jeux d'IMAC"}};
-    ctx.start();
 }

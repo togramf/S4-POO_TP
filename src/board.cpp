@@ -13,14 +13,13 @@ void position_to_cell_index(const glm::vec2 position, CellIndex& cell, const Boa
     cell._y = static_cast<int>(p6::map(position.y, -1.f, 1.f, 0.f, static_cast<float>(size._height)));
 }
 
-glm::vec2 cell_index_to_position(const CellIndex& index, const BoardSize size) //const p6::Context& ctx
+glm::vec2 cell_index_to_position(const CellIndex& index, const BoardSize size)
 {
     const auto idx = glm::vec2{static_cast<float>(index._x),
                                static_cast<float>(index._y)};
     return p6::map(idx,
                    glm::vec2{0.f}, glm::vec2{static_cast<float>(size._width), static_cast<float>(size._height)},
                    glm::vec2{-board_ratio(size), -1.f}, glm::vec2{board_ratio(size), 1.f});
-    //    glm::vec2{-1.f, -ctx.aspect_ratio()}, glm::vec2{1.f, ctx.aspect_ratio()});
 }
 
 //Drawing functions

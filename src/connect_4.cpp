@@ -13,9 +13,8 @@ std::optional<CellIndex> hovered_cell(const glm::vec2 position, const BoardSize 
 {
     CellIndex index;
     position_to_cell_index(position, index, size);
-    if (index._x >= 0 && index._x < size._width && index._y >= 0 && index._y < size._height) {
+    if (index._x >= 0 && index._x < size._width && index._y >= 0 && index._y < size._height)
         return std::make_optional(index);
-    }
     return std::nullopt;
 }
 

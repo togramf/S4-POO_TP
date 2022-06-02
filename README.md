@@ -102,18 +102,22 @@ avoid duplications by using :
 to express different possible situations
 
 Example :
-`enum class Direction { North, South,};`
+``` c++
+enum class Direction { North, South,};
 can be used by 
-`switch (direction) {
+switch (direction) {
     case Direction::North:
         /*...*/
-}`
+}
+```
 or 
-`using enum Direction;
+``` c++
+using enum Direction;
 switch (direction) {
     case North:
         /*...*/
-}`
+}
+```
 
 #### Split problems in small pieces 
 it's all in the title 
@@ -137,10 +141,103 @@ polymorphism :
 
 - [ ] see [Mateusz Pusz “Effective replacement of dynamic polymorphism with std::variant”](https://youtu.be/gKbORJtnVu8)
 
+### Level 3
+
+#### std::vector
+container like `std::list` but often more performant because of cache cohenrency. 
+
+- [ ] see [Dynamic Arrays in C++ (std::vector) by The Cherno](https://youtu.be/PocJ5jXv8No)
+
+#### Minimize dependencies
+definition : dependencies are all the things a class / function can access to and that make it complex.
+
+Reasons to minimize them : 
+- less potential for bugs
+- clearer code
+- easier to change some parts of the code without adapting everything
+
+How : 
+- free functions 
+- minimum and precise parameters
+
+#### Strong Types
+Wrap to give an `int` a name, invariants, etc.
+-> expresses intent, helps concrete representation of concepts and prevents misuse and logic errors
+
+**Example :** 
+
+`Rectangle r (10, 12);` -> we don't know which one is height or width
+
+`using Width = NamedType<double, struct WidthParameter>;` -> WidthParameter is a struct used to differentiate Width from Height
+
+And now we can do : `Rectangle r (Width(10), Height(12));`
+
+**Resources :** 
+- [Type safe library Git](https://github.com/foonathan/type_safe)
+- [ ] Read [Tutorial: Emulating strong/opaque typedefs in C++](https://www.foonathan.net/2016/10/strong-typedefs/) 
+- [x] Read [Strong types for strong interfaces](https://www.fluentcpp.com/2016/12/08/strong-types-for-strong-interfaces/)
+- [ ] See [CppCon 2016: Ben Deane “Using Types Effectively"](https://youtu.be/ojZbFIQSdl8)
+- [ ] Watch [CppCon 2020: Mateusz Pusz "A Physical Units Library For the Next C++"](https://youtu.be/7dExYGSOJzo) 
+- [ ] Watch [CppCon 2016: Robert Ramey “C++, Abstract Algebra and Practical Applications"](https://youtu.be/632a-DMM5J0)
+
+#### Use libraries
+Use Git submodule & Read documentation !! 
+
+Cmake :
+``` cmake
+add_subdirectory(libname)
+target_link_libraries(${PROJECT_NAME} PRIVATE libname)
+```
+
+#### Range-based for loop 
+Why : 
+- guaranties the index in the body of the loop won't be modified
+- expresses the intent 
+
+Examples : 
+- to modify elements : `for (auto& element : container)`
+- no modification and element is costly : `for (const auto& element : container)`
+- no modification and element is cheap : `for (auto element : container)`
+
+#### std::optional 
+
+don't need to allocate memory on the free store
+
+How to: 
+- `#include <optional>` since C++17
+- `std::optional<type> optionalPtr`
+- `std::nullopt`
+- `std::make_optional<type_or_nothing>(optionalValue)`
+- `std::in_place`
+- check if there is a value: `has_value()` or `if (optional)`
+- accessing the store value: `operator*` or `operator->` (if empty = undefined); `value()`; `value_or(defaultValue)`
+- changing the value: `emplace(value)`; `reset()`; 
+- comparisons is possible with "<", ">", etc. 
+
+
+When: when the lack of value is as natural as having any regular value
+- to represent a nullable type 
+- return a result that can be empty and it's not an error
+- to pass optional parameters into functions 
+
+**Resources:**
+- [x] Read [Using C++17 std::optional](https://www.cppstories.com/2018/05/using-optional/)
+- [ ] Watch [CppCon 2016: Ben Deane “Using Types Effectively"](https://youtu.be/ojZbFIQSdl8)
+
+#### Markdown
+
+- [x] See [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
 ## TP
 
-General Notes: 
-- [ ] STOP: copy of string in argument
+#### General Notes: 
+
+STOP: copy of string in argument
+
+Naming system : 
+- function_and_parameters_names ; 
+- StructNames ; 
+- _struct_properties_names ;
 
 ### Guess the number 
 

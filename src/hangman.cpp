@@ -30,12 +30,18 @@ const char* pick_a_word_to_guess()
 {
     static constexpr std::array words = {
         "code",
-        "crous",
         "imac",
-        "opengl",
         "velo",
-        "chocolate",
+        "beer",
+        "crous",
+        "apero",
+        "cinema",
+        "opengl",
+        "shinimac",
+        "copernic",
         "jeudimac",
+        "chocolate",
+        "microwave",
     };
 
     return words[rand<int>(0, words.size() - 1)];
@@ -112,7 +118,7 @@ void play_hangman()
     WordWithMissingLetters         word          = WordWithMissingLetters(pick_a_word_to_guess());
     std::string                    letters_tried = "";
     const std::vector<const char*> congrats_list = {"Great !", "Amazing !", "U're so good", "Yes, :)", "Congrats !", "You rule !", "Hooray !", "I'm proud of you"};
-    const std::vector<const char*> reproach_list = {"No no no !", "Nope !", "U're so bad.", "Sorry...", "Of course not !", "You suck !"};
+    const std::vector<const char*> reproach_list = {"No no no !", "Nope !", "U're so bad.", "Sorry...", "Of course not !", "You suck !", "Don't be silly..."};
 
     std::cout << "I picked a random word, " << word.word().size() << " letters, let's try to guess it !\n";
     show_number_of_lives(number_of_lives);
